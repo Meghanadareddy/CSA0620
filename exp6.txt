@@ -1,0 +1,79 @@
+#include <stdio.h>
+
+// Swap function
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// Partition function for Quick Sort
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+
+    swap(&arr[i + 1], &arr[high]);
+    return i + 1;
+}
+
+// Quick Sort function
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int main() {
+    int n;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    // Case 1: Empty List
+    if (n == 0) {
+        printf("List is empty. No maximum element.\n");
+        return 0;
+    }
+
+    int arr[n];
+
+    printf("Enter elements:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Case 2: Single Element
+    if (n == 1) {
+        printf("Maximum element: %d\n", arr[0]);
+        return 0;
+    }
+
+    // Sort the array
+    quickSort(arr, 0, n - 1);
+
+    // Maximum element is last element after sorting
+    printf("Maximum element: %d\n", arr[n - 1]);
+
+    return 0;
+}
+
+
+OUTPUT:
+Enter number of elements: 5
+Enter elements:
+1
+6
+9
+7
+3
+Maximum element: 9

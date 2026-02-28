@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+// Function to check if element already exists in array
+int exists(int arr[], int size, int value) {
+    for(int i = 0; i < size; i++) {
+        if(arr[i] == value)
+            return 1;
+    }
+    return 0;
+}
+
+int main() {
+    int n;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter elements:\n");
+    for(int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int unique[n];   // New array to store unique elements
+    int k = 0;       // Size of unique array
+
+    for(int i = 0; i < n; i++) {
+        if(!exists(unique, k, arr[i])) {
+            unique[k++] = arr[i];
+        }
+    }
+
+    printf("Unique elements:\n");
+    for(int i = 0; i < k; i++) {
+        printf("%d ", unique[i]);
+    }
+
+    return 0;
+}
+
+
+OUTPUT:
+Enter number of elements: 5
+Enter elements:
+11
+5
+11
+5
+3
+Unique elements:
+11 5 3 
